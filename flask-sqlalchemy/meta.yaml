@@ -1,0 +1,29 @@
+package:
+  name: flask-sqlalchemy
+  version: !!str 2.0
+
+source:
+  fn: Flask-SQLAlchemy-2.0.tar.gz
+  url: https://pypi.python.org/packages/source/F/Flask-SQLAlchemy/Flask-SQLAlchemy-2.0.tar.gz
+  md5: 06ae73194cca73b72e178f870d1dac7c
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - flask
+    - sqlalchemy
+
+  run:
+    - python
+    - flask
+    - sqlalchemy
+
+test:
+  imports:
+    - flask.ext.sqlalchemy
+
+about:
+  home: https://pythonhosted.org/Flask-SQLAlchemy/
+  license: Berkeley Software Distribution License
+  summary: 'Adds SQLAlchemy support to Flask.'
