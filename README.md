@@ -1,7 +1,6 @@
 * Travis-CI dependency resolution test: [![Travis dependency resolution test](https://travis-ci.org/choderalab/conda-recipes.svg?branch=master)](https://travis-ci.org/choderalab/conda-recipes)
-* Jenkins `osx` build: [![Jenkins `osx` build](https://jenkins.choderalab.org/job/conda-choderalab-release-osx-2/badge/icon)](https://jenkins.choderalab.org/job/conda-choderalab-release-osx-2/) [[console log]](https://jenkins.choderalab.org/job/conda-choderalab-release-osx-2/lastBuild/consoleFull)
-* Jenkins `linux` build: [![Jenkins `linux` build](https://jenkins.choderalab.org/job/conda-choderalab-release-linux-vagrant/badge/icon)](https://jenkins.choderalab.org/job/conda-choderalab-release-linux-vagrant/) [[console log]](https://jenkins.choderalab.org/job/conda-choderalab-release-linux-vagrant/lastBuild/consoleFull)
-* Appveyor-CI `windows` builds [![Appveyor Build status](https://ci.appveyor.com/api/projects/status/tsjbbgtobpbb4xps?svg=true)](https://ci.appveyor.com/project/rmcgibbo/conda-recipes)
+* Jenkins `osx` build: [![Jenkins `osx` build](https://jenkins.choderalab.org/job/choderalab-conda-release-osx-2/badge/icon)](https://jenkins.choderalab.org/job/choderalab-conda-release-osx/) [[console log]](https://jenkins.choderalab.org/job/choderalab-conda-release-osx/lastBuild/consoleFull)
+* Jenkins `linux` build: [![Jenkins `linux` build](https://jenkins.choderalab.org/job/choderalab-conda-release-linux/badge/icon)](https://jenkins.choderalab.org/job/choderalab-conda-release-linux/) [[console log]](https://jenkins.choderalab.org/job/choderalab-conda-release-linux-vagrant/lastBuild/consoleFull)
 
 conda-recipes
 -------------
