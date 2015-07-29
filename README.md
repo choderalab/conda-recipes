@@ -1,5 +1,5 @@
 * Travis-CI dependency resolution test: [![Travis dependency resolution test](https://travis-ci.org/choderalab/conda-recipes.svg?branch=master)](https://travis-ci.org/choderalab/conda-recipes)
-* Jenkins `osx` build: [![Jenkins `osx` build](https://jenkins.choderalab.org/job/choderalab-conda-release-osx-2/badge/icon)](https://jenkins.choderalab.org/job/choderalab-conda-release-osx/) [[console log]](https://jenkins.choderalab.org/job/choderalab-conda-release-osx/lastBuild/consoleFull)
+* Jenkins `osx` build: [![Jenkins `osx` build](https://jenkins.choderalab.org/job/choderalab-conda-release-osx/badge/icon)](https://jenkins.choderalab.org/job/choderalab-conda-release-osx/) [[console log]](https://jenkins.choderalab.org/job/choderalab-conda-release-osx/lastBuild/consoleFull)
 * Jenkins `linux` build: [![Jenkins `linux` build](https://jenkins.choderalab.org/job/choderalab-conda-release-linux/badge/icon)](https://jenkins.choderalab.org/job/choderalab-conda-release-linux/) [[console log]](https://jenkins.choderalab.org/job/choderalab-conda-release-linux-vagrant/lastBuild/consoleFull)
 
 conda-recipes
