@@ -267,9 +267,10 @@ def execute(args, p):
     numpys = re.split(',\s*|\s+', args.numpy)
 
     args_recipe = reduce(operator.add, (glob.glob(e) for e in args.recipe))
-    recipes = [abspath(e) for e in sort_recipes(args_recipe)]
+    sorted_recipes = sort_recipes(args_recipe)
+    recipes = [abspath(e) for e in sorted_recipes]
     print('Building recipes in the following order:')
-    print(', '.join([basename(r) for r in args_recipe]))
+    print(', '.join([basename(r) for r in recipes]))
     print()
 
     curdir = abspath(os.curdir)
@@ -278,6 +279,7 @@ def execute(args, p):
         os.chdir(tempdir)
 
         for recipe in recipes:
+            print(recipe)
             metadata = MetaData(recipe)
             for python in VersionIter('python', metadata, pythons):
                 for numpy in VersionIter('numpy', metadata, numpys):
