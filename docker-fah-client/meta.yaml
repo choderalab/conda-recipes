@@ -1,0 +1,26 @@
+package:
+  name: docker-fah-client
+  version: 0.1.0
+
+source:
+    git_url: https://github.com/choderalab/docker-fah-client.git
+    git_tag: master
+
+build:
+  preserve_egg_dir: True
+  number: 0
+
+requirements:
+  build:
+    - python
+
+  run:
+    - python
+
+test:
+  commands:
+    - fah-client --help
+
+about:
+  home: https://github.com/choderalab/docker-fah-client
+  license: GNU Lesser General Public License v2 or later (LGPLv2+)
