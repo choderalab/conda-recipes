@@ -1,0 +1,39 @@
+package:
+  name: openmm-core21
+  version: peastman-rebuild
+
+source:
+  git_url: https://github.com/peastman/openmm.git
+  git_tag: rebuild
+
+build:
+  number: 0
+  preserve_egg_dir: yes
+
+requirements:
+  build:
+    # on windows, need to install cmake manually
+    - cmake  # [not win]
+    - python
+    - fftw3f
+    - sphinx
+    - sphinxcontrib-bibtex
+    - swig   # [not win]
+
+  run:
+    - python
+    - fftw3f
+
+test:
+  requires:
+    - python
+  imports:
+    - simtk
+    - simtk.openmm
+  commands:
+    - python -m simtk.testInstallation  # [not win]
+
+about:
+  home: http://openmm.org
+  license: LGPL and MIT
+  summary: A high performance toolkit for molecular simulation.
