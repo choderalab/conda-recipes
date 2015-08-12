@@ -51,5 +51,7 @@ install:
 build: false
 
 test_script:
+  # Don't attempt upload if this is a PR.
+  - ps: if (($env:APPVEYOR_PULL_REQUEST_NUMBER -eq $null) -and ($env:APPVEYOR_REPO_BRANCH -eq "master")) { $env:UPLOAD = "--upload omnia" } else { $env:UPLOAD = " " }
   - "%CMD_IN_ENV% python conda-build-all --check-against choderalab --upload choderalab --python %CONDA_PY% --numpy %CONDA_NPY% *"
 
