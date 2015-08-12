@@ -43,6 +43,7 @@ install:
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - conda config --add channels http://conda.binstar.org/choderalab
   - conda config --add channels http://conda.binstar.org/omnia
+  - pip install -i https://pypi.anaconda.org/carlkl/simple mingwpy
   - choco install -y jom
   - choco install -y doxygen.install
   - choco install -y swig
