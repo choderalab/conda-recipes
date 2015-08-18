@@ -27,8 +27,6 @@ test:
     - nose
   imports:
     - targetexplorer
-  commands:
-    - nosetests targetexplorer --exe -v -a unit
 
 about:
   home: https://github.com/choderalab/targetexplorer
