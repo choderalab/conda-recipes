@@ -1,3 +1,5 @@
+os: Visual Studio 2015
+
 branches:
   only:
   - master
@@ -12,46 +14,55 @@ environment:
     #  secure: 8ZUGhuOs5ffofdj5EqrwBaN+k9da2CbYVuve7QFl5SYvI0DwcfCcLw23GbkYKXoK
 
   matrix:
-    - PYTHON: "C:\\Python27_32"
-      PYTHON_VERSION: "2.7"
-      PYTHON_ARCH: "32"
+    - PYTHON: "C:\\Miniconda"
       CONDA_PY: "27"
-      CONDA_NPY: "19"#
-
-    - PYTHON: "C:\\Python27_64"
-      PYTHON_VERSION: "2.7"
-      PYTHON_ARCH: "64"
-      CONDA_PY: "27"
-      CONDA_NPY: "19"
-
-    - PYTHON: "C:\\Python34_32"
-      PYTHON_VERSION: "3.4"
+      PYTHON_VERSION: "2.7.x"
       PYTHON_ARCH: "32"
-      CONDA_PY: "34"
-      CONDA_NPY: "19"
-
-    - PYTHON: "C:\\Python34_64"
-      PYTHON_VERSION: "3.4"
+    - PYTHON: "C:\\Miniconda-x64"
+      CONDA_PY: "27"
+      PYTHON_VERSION: "2.7.x"
       PYTHON_ARCH: "64"
+
+    - PYTHON: "C:\\Miniconda3"
       CONDA_PY: "34"
-      CONDA_NPY: "19"
+      PYTHON_VERSION: "3.4.x"
+      PYTHON_ARCH: "32"
+    - PYTHON: "C:\\Miniconda3-x64"
+      CONDA_PY: "34"
+      PYTHON_VERSION: "3.4.x"
+      PYTHON_ARCH: "64"
+
+    - PYTHON: "C:\\Miniconda3"
+      CONDA_PY: "35"
+      PYTHON_VERSION: "3.5.x"
+      PYTHON_ARCH: "32"
+
+    - PYTHON: "C:\\Miniconda3-x64"
+      CONDA_PY: "35"
+      PYTHON_VERSION: "3.5.x"
+      PYTHON_ARCH: "64"
 
 install:
-  # this installs the appropriate Miniconda (Py2/Py3, 32/64 bit),
-  # as well as pip, conda-build, and the binstar CLI
-  - powershell .\\devtools\\appveyor\\install.ps1
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
-  - conda config --add channels http://conda.binstar.org/choderalab
-  - conda config --add channels http://conda.binstar.org/omnia
-  - pip install -i https://pypi.anaconda.org/carlkl/simple mingwpy
-  - choco install -y jom
-  - choco install -y doxygen.install
-  - choco install -y swig
+  - conda config --add channels omnia
+  - conda config --add channels choderalab
+  - conda update -yq --all
+  - conda install -yq conda-build jinja2 anaconda-client
+  - powershell .\\devtools\\appveyor\\missing-headers.ps1
+  # conda-build for some inane reason, effectively puts C:\cygwin\bin at the
+  # front of the PATH, ahead of everything else, regardless. See
+  # https://github.com/conda/conda-build/blob/master/conda_build/external.py#L19
+  # On Appveyor, the version of git installed there doesn't work
+  # outside of the cygwin envronment, so despite a perfectly good version of
+  # git being installed somewhere else (git for windows, which works properly),
+  # conda-build will always choose to use the broken one. The only way I could
+  # think of to fix this is just to delete the broken one, so that it never gets
+  # found by conda-build. Or someone could fix conda-build.
+  - "del C:\\cygwin\\bin\\git.exe"
+  - ps: (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/omnia-md/conda-recipes/master/conda-build-all", $env:APPVEYOR_BUILD_FOLDER + "\conda-build-all")
 
 build: false
 
 test_script:
-  # Don't attempt upload if this is a PR.
-  - ps: if (($env:APPVEYOR_PULL_REQUEST_NUMBER -eq $null) -and ($env:APPVEYOR_REPO_BRANCH -eq "master")) { $env:UPLOAD = "--upload omnia" } else { $env:UPLOAD = " " }
-  - "%CMD_IN_ENV% python conda-build-all --check-against choderalab --upload choderalab --python %CONDA_PY% --numpy %CONDA_NPY% *"
-
+  - ps: if (($env:APPVEYOR_PULL_REQUEST_NUMBER -eq $null) -and ($env:APPVEYOR_REPO_BRANCH -eq "master")) { $env:UPLOAD = "--upload choderalab" } else { $env:UPLOAD = " " }
+  - "%CMD_IN_ENV% python conda-build-all %UPLOAD% --python %CONDA_PY% --force *"
